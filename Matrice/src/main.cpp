@@ -1,7 +1,7 @@
 #include <Arduino.h>
 int i=0;
-int cols[] = {99,13,3,4,10,6}//il primo valore è un valore vuoto per iniziare le colonne da 1 anzichè 0 solo per più facile comprensione gli altri valori sono valori dei pin assegnati
-int rows[] = {99,9,14,8,12,5,1,7,2}//il primo valore è un valore vuoto per iniziare le colonne da 1 anzichè 0 solo per più facile comprensione
+int cols[] = {99,13,3,4,10,6};//il primo valore è un valore vuoto per iniziare le colonne da 1 anzichè 0 solo per più facile comprensione gli altri valori sono valori dei pin assegnati
+int rows[] = {99,9,14,8,12,5,1,7,2};//il primo valore è un valore vuoto per iniziare le colonne da 1 anzichè 0 solo per più facile comprensione
 
 int pinArray[] = {2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 int draw[] = {99,//primo valore inutile solo per spostare la numerazione da 1 a 40
@@ -24,15 +24,18 @@ void setup() {
 
 void write(){  
 Serial.print('1');
-for (i=0; i<=39;i++){
-  static a=1;
-    if(draw[i]==1 && i == 1){
-      
+for (i=1; i<=39;i++){
+
+    if(draw[i]==1 && 1<=i && i<=5 ){
       digitalWrite(cols[1], LOW);
       digitalWrite(rows[1], HIGH);
       delay(1);
     }
-    for ()
+    else if (draw[i]==1 && i == 1) 
+    /*
+    for (i=1; i<=5;i++){
+      digitalWrite(cols[i], HIGH);
+    }*/
 
 }
 //identifico quale delle colonne viene attivata e spengo le altre
