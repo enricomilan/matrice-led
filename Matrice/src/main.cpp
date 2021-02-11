@@ -1,9 +1,10 @@
 #include <Arduino.h>
 int i=0;
+uint8_t x=0;
 int cols[] = {99,13,3,4,10,6};//il primo valore è un valore vuoto per iniziare le colonne da 1 anzichè 0 solo per più facile comprensione gli altri valori sono valori dei pin assegnati
-int rows[] = {99,9,14,8,12,5,1,7,2};//il primo valore è un valore vuoto per iniziare le colonne da 1 anzichè 0 solo per più facile comprensione
+int rows[] = {99,9,14,16,12,5,15,7,2};//il primo valore è un valore vuoto per iniziare le colonne da 1 anzichè 0 solo per più facile comprensione
 
-int pinArray[] = {2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+int pinArray[] = {2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 uint8_t t[] = {
 1,1,1,1,1,
 0,0,1,0,0,
@@ -15,27 +16,27 @@ uint8_t t[] = {
 0,0,1,0,0};
 
 uint8_t a[] = {
-1,1,1,1,1,
 0,0,1,0,0,
 0,0,1,0,0,
 0,0,1,0,0,
 0,0,1,0,0,
 0,0,1,0,0,
 0,0,1,0,0,
-0,0,1,0,0};
+0,0,1,0,0,
+1,0,1,0,1};
 
 void setup() {
- for (i=0;i<=14;i++) {
-  pinMode(pinArray[i],OUTPUT);//inizializzo tutti i pin della matrice come output
+ for (x=0;x<=15;x++) {
+  pinMode(pinArray[x],OUTPUT);//inizializzo tutti i pin della matrice come output
  }
- if (i == 15){i=0;}
+ if (x == 16){x=0;}
  Serial.begin(115200);
 }
 
 void write(uint8_t *image){  
 Serial.print('1');
 
-for (i=0; i<40;i++){
+for (i=0; i<=40;i++){
   //colonne
     if(image[i]==1 && (i==0 || i==5 || i==10 || i==15 || i==20 || i==25 || i==30 || i==35)){
       digitalWrite(cols[1], LOW);
@@ -151,7 +152,7 @@ for (i=0; i<40;i++){
       digitalWrite(rows[8], LOW);
       //delay(1);
     }
-    else if(image[i]==1 && i<=39){//se almeno 1 dei led di riga 8 è acceso
+    else if(image[i]==1 && i<=40){//se almeno 1 dei led di riga 8 è acceso
       digitalWrite(rows[1], LOW);
       digitalWrite(rows[2], LOW);  //spengo le altre righe
       digitalWrite(rows[3], LOW);  //spengo le altre righe
@@ -162,18 +163,15 @@ for (i=0; i<40;i++){
       digitalWrite(rows[8], HIGH);
       //delay(1);
     }
-      digitalWrite(cols[1], HIGH);
-      digitalWrite(cols[2], HIGH);
-      digitalWrite(cols[3], HIGH);
-      digitalWrite(cols[4], HIGH);
-      digitalWrite(cols[5], HIGH);
+  
 }
 }//fine funzione write
 
 void loop() {
 
-  write(t);
   write(a);
   
+
+
 
 }
